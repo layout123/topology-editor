@@ -1,4 +1,7 @@
+import { UnitConfig } from '../type';
 export class Unit {
-  public width: number = 0;
-  public height: number = 0;
+  public config: UnitConfig;
+  constructor(config: UnitConfig) {
+    this.config = config;
+  }
 }

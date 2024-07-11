@@ -48,3 +48,9 @@ export interface AppConfig {
   node: Node[];
   edge: Edge[];
 }
+
+export interface UnitConfig {
+  id: string;
+  name: string;
+  props: Record<string, any>;
+}

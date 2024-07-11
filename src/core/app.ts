@@ -6,10 +6,10 @@ import { AppConfig, AppContextEventArgs } from './type';
 class App extends EventBus<AppContextEventArgs> {
   public renderer: Renderer;
   public config: AppConfig;
-  constructor(config: AppConfig, dom: HTMLDivElement) {
+  constructor(config: AppConfig, container: HTMLDivElement) {
     super();
     this.config = config;
-    this.renderer = new Renderer(this, dom);
+    this.renderer = new Renderer(this, container);
   }
 }
 

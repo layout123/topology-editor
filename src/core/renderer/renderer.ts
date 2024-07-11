@@ -14,9 +14,9 @@ const defaultGrid = {
 export class Renderer {
   public graph?: Graph;
   public appContext: AppContext;
-  constructor(context: AppContext, dom: HTMLDivElement) {
+  constructor(context: AppContext, container: HTMLDivElement) {
     this.appContext = context;
-    this.createGraph(dom);
+    this.createGraph(container);
   }
   public createGraph(dom: HTMLDivElement) {
     const domElement = document.createElement('div');
@@ -31,6 +31,7 @@ export class Renderer {
     this.appContext.emit('GRAPH_CREATED', { graph: this.graph });
   }
 
+  //禁用/开启缩放
   public disableMousewheel(is: boolean) {
     is ? this.graph?.disableMouseWheel() : this.graph?.enableMouseWheel();
   }
@@ -45,6 +46,7 @@ export class Renderer {
     this.graph?.updateBackground();
   }
 
+  //重绘画布
   public drawGrid(options: Graph.GridManager.Options) {
     this.graph?.drawGrid(options);
   }
