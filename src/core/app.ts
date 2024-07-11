@@ -1,13 +1,14 @@
 import { EventBus } from '@/utils/event';
 
 import { Renderer } from './renderer/renderer';
-import { AppContextEventArgs } from './type';
+import { AppConfig, AppContextEventArgs } from './type';
 
 class App extends EventBus<AppContextEventArgs> {
   public renderer: Renderer;
-  public config: any;
-  constructor(config: any, dom: HTMLDivElement) {
+  public config: AppConfig;
+  constructor(config: AppConfig, dom: HTMLDivElement) {
     super();
+    this.config = config;
     this.renderer = new Renderer(this, dom);
   }
 }

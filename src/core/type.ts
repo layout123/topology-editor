@@ -42,3 +42,9 @@ export interface AppContextEventArgs extends ProjectEventArgs {
     domElement: HTMLDivElement;
   };
 }
+
+export interface AppConfig {
+  grid?: Graph.GridManager.Options;
+  node: Node[];
+  edge: Edge[];
+}
