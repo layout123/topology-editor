@@ -1,4 +1,4 @@
-import { Graph } from '@antv/x6';
+import { Cell, Graph } from '@antv/x6';
 
 import { Edge } from './base/Edge';
 import { Node } from './base/Node';
@@ -49,8 +49,18 @@ export interface AppConfig {
   edge: Edge[];
 }
 
-export interface UnitConfig {
-  id: string;
+export interface NodeConfig {
+  size: {
+    width: number;
+    height: number;
+  };
+  position: {
+    x: number;
+    y: number;
+  };
+}
+
+export interface UnitConfig extends Cell {
   name: string;
   props: Record<string, any>;
 }
