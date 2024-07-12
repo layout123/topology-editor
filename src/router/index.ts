@@ -7,12 +7,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'index',
     component: Layout,
-    redirect: '/home',
+    redirect: '/editor',
     children: [
       {
         path: '/home',
         name: 'home',
         component: () => import('@/views/home/index.vue'),
+      },
+      {
+        path: '/editor',
+        name: 'editor',
+        component: () => import('@/views/editor/index.vue'),
       },
     ],
   },

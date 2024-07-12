@@ -1,6 +1,7 @@
 import { Graph } from '@antv/x6';
 
 import AppContext from '../app';
+import { Node } from '../base/Node';
 
 const defaultGrid = {
   visible: true,
@@ -24,6 +25,11 @@ export class Renderer {
     dom.appendChild(domElement);
     const gridOption = this.appContext.config.grid ?? defaultGrid;
     this.graph = new Graph({
+      mousewheel: {
+        enabled: true,
+        modifiers: ['ctrl', 'meta'],
+      },
+      panning: true,
       container: domElement,
       autoResize: true,
       grid: gridOption,
@@ -64,5 +70,13 @@ export class Renderer {
   //缩放至比例
   public zoomToFit() {
     this.graph?.zoomToFit();
+  }
+
+  public pageToLocal(x: number, y: number) {
+    return this.graph?.pageToLocal(x, y);
+  }
+
+  public addNode(node: Node) {
+    this.graph?.addNode(node);
   }
 }
