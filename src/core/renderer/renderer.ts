@@ -73,10 +73,10 @@ export class Renderer {
   }
 
   public pageToLocal(x: number, y: number) {
-    return this.graph?.pageToLocal(x, y);
+    return this.graph?.graphToLocal(x, y);
   }
 
-  public addNode(node: Node) {
+  public addNode(node: any) {
     this.graph?.addNode(node);
   }
 }
