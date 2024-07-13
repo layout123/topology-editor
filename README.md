@@ -32,13 +32,9 @@ npm run dev
 npm run build
 ```
 
-## Q&A
+## 联系作者
 
-1. Q: `git cz` 不生效  
+📫: songjilong@threbody.xyz`
+🛰： iDo284
 
-   A: 请全局安装 commitizen，命令：`npm install commitizen -g`
-
-2. Q: husky 报错  
-
-   A: 请检查你的项目下是否有 Git 仓库，没有则先 `git init` 初始化一个
 
