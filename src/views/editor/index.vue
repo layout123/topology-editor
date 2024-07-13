@@ -15,7 +15,7 @@
         <WorkSpace />
       </ResizablePanel>
       <ResizableHandle with-handle />
-      <ResizablePanel :default-size="15">Two</ResizablePanel>
+      <ResizablePanel :default-size="15"></ResizablePanel>
     </ResizablePanelGroup>
   </div>
 </template>
