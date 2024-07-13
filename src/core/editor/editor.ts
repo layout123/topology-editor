@@ -4,6 +4,7 @@ import { Selection } from '@antv/x6-plugin-selection';
 import { Snapline } from '@antv/x6-plugin-snapline';
 import { Transform } from '@antv/x6-plugin-transform';
 import { Keyboard } from '@antv/x6-plugin-keyboard'
+import { Clipboard } from '@antv/x6-plugin-clipboard'
 import { EventBus } from '@/utils/event';
 import AppContext from '../app';
 import { EditorEventArgs } from '@/core/type';
@@ -50,6 +51,11 @@ export class Editor extends EventBus<EditorEventArgs> {
         grid: 15,
       },
     }));
+
+    this.graph?.use(new Clipboard({
+      enabled: true,
+    }));
+
     this.graph?.use(new Keyboard({
       enabled: true,
       global: true,
@@ -60,6 +66,22 @@ export class Editor extends EventBus<EditorEventArgs> {
     this.graph?.on('node:selected', (node)=>{
       console.log('当前选中节点',node)
     });
+    this.graph?.bindKey('ctrl+c', () => {
+      const cells = this.graph?.getSelectedCells()
+      if (cells?.length) {
+        this.graph?.copy(cells)
+      }
+      return false
+    })
+
+    this.graph?.bindKey('ctrl+v', () => {
+      if (!this.graph?.isClipboardEmpty()) {
+        const cells = this.graph?.paste({ offset: 32 })!
+        this.graph?.cleanSelection()
+        this.graph?.select(cells)
+      }
+      return false
+    })
   }
 }
 
