@@ -5,6 +5,7 @@ import { Snapline } from '@antv/x6-plugin-snapline';
 import { Transform } from '@antv/x6-plugin-transform';
 import { Keyboard } from '@antv/x6-plugin-keyboard'
 import { Clipboard } from '@antv/x6-plugin-clipboard'
+import { History } from '@antv/x6-plugin-history'
 import { EventBus } from '@/utils/event';
 import AppContext from '../app';
 import { EditorEventArgs } from '@/core/type';
@@ -59,6 +60,10 @@ export class Editor extends EventBus<EditorEventArgs> {
     this.graph?.use(new Keyboard({
       enabled: true,
       global: true,
+    }));
+    
+    this.graph?.use(new History({
+      enabled: true,
     }));
   }
 
