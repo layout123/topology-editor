@@ -42,6 +42,8 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible'
 
+import { Search } from 'lucide-vue-next'
+
 const searchText = ref('');
 
 const baseModel = [{
