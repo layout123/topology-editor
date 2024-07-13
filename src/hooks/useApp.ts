@@ -1,13 +1,12 @@
-import App from '@/core/app';
-
-const state = reactive({
-    app: null as App | null,
-});
+import { AppKey } from '@/constants/inject-keys';
+import { App } from '@/core';
 
 export const useApp = () => {
-    return state;
+    const app = new App();
+  
+    provide(AppKey, {
+      app,
+    });
 };
 
-export function provideApp(newApp: App) {
-  state.app = newApp;
-}
+export default useApp;

@@ -1,40 +1,34 @@
 import { Graph } from '@antv/x6';
-
+import { EventBus } from '@/utils/event';
 import AppContext from '../app';
-import { Node } from '../base/Node';
-
-const defaultGrid = {
-  visible: true,
-  type: 'mesh',
-  args: {
-    color: '#ddd', // 网格线颜色
-    thickness: 1, // 网格线宽度
-  },
-};
-
-export class Renderer {
+import { defaultGraphOptions } from '@/constants/graph';
+export class Renderer extends EventBus {
   public graph?: Graph;
+  public options?: Graph.Options;
   public appContext: AppContext;
-  constructor(context: AppContext, container: HTMLDivElement) {
+  constructor(context: AppContext) {
+    super();
+
     this.appContext = context;
-    this.createGraph(container);
-  }
-  public createGraph(dom: HTMLDivElement) {
-    const domElement = document.createElement('div');
-    domElement.setAttribute('style', 'width: 100%; height: 100%; position: relative; overflow: hidden;');
-    dom.appendChild(domElement);
-    const gridOption = this.appContext.config.grid ?? defaultGrid;
-    this.graph = new Graph({
-      mousewheel: {
-        enabled: true,
-        modifiers: ['ctrl', 'meta'],
-      },
-      panning: true,
-      container: domElement,
-      autoResize: true,
-      grid: gridOption,
+    this.createGraph(context);
+
+    this.on('graph:resize', ({ width, height }) => {
+      this.graph?.resize(width, height);
     });
-    this.appContext.emit('GRAPH_CREATED', { graph: this.graph });
+  }
+  public createGraph(context: AppContext, options?:Graph.Options) {
+    this.graph?.off();
+    this.graph?.dispose();
+
+    const graphElement = document.createElement('div');
+    graphElement.setAttribute('style', 'width: 100%; height: 100%; position: relative; overflow: hidden;');
+    context.domElement.appendChild(graphElement);
+    const metadata =  {
+      container: graphElement,
+      ...defaultGraphOptions(),
+      ...options,
+    }
+     this.graph = new Graph(metadata);
   }
 
   //禁用/开启缩放
@@ -80,3 +74,5 @@ export class Renderer {
     this.graph?.addNode(node);
   }
 }
+
+export default Renderer;

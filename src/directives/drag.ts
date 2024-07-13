@@ -3,6 +3,6 @@ export default {
       el.draggable = true;
       el.addEventListener('dragstart', (event) => {
         event.dataTransfer?.setData('shapeType', binding.arg);
-      });
+      },{ passive: true });
     },
   };

@@ -1,5 +1,5 @@
 import { Cell, Graph } from '@antv/x6';
-
+import App from './app';
 import { Edge } from './base/Edge';
 import { Node } from './base/Node';
 import { Project } from './base/project';
@@ -34,6 +34,10 @@ export interface ProjectEventArgs {
   };
 }
 
+export interface Context {
+  app: App;
+}
+
 export type Id = string | number;
 
 export const enum BaseShape {
@@ -55,6 +59,7 @@ export const enum CustomShape {
 export interface AppContextEventArgs extends ProjectEventArgs {
   GRAPH_CREATED: {
     graph: Graph;
+    options: Graph.Options;
   };
   GRAPH_MOUNTED: {
     domElement: HTMLDivElement;
