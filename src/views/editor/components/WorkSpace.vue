@@ -15,10 +15,13 @@
   1: BaseShape.Rect,
   2: BaseShape.Circle,
   3: BaseShape.Ellipse,
+  4: BaseShape.Polygon,
+  5: BaseShape.Polyline,
 };
 
   const onDrop = (event: DragEvent) => {
   event.preventDefault();
+  console.log('onDrop', event);
   if (!canvasRef.value || !app) return;
   const shapeType = Number(event.dataTransfer?.getData('shapeType'));
   const shape = shapeMapping[shapeType];

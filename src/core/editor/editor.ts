@@ -3,9 +3,11 @@ import { Export } from '@antv/x6-plugin-export';
 import { Selection } from '@antv/x6-plugin-selection';
 import { Snapline } from '@antv/x6-plugin-snapline';
 import { Transform } from '@antv/x6-plugin-transform';
+import { Keyboard } from '@antv/x6-plugin-keyboard'
 import { EventBus } from '@/utils/event';
 import AppContext from '../app';
-export class Editor extends EventBus {
+import { EditorEventArgs } from '@/core/type';
+export class Editor extends EventBus<EditorEventArgs> {
   public graph?: Graph;
   public appContext: AppContext;
   constructor(context: AppContext,graph?: Graph ) {
@@ -13,6 +15,7 @@ export class Editor extends EventBus {
     this.appContext = context;
     this.graph = graph;
     context.on('GRAPH_CREATED',this.initGraphPlugin)
+    context.on('GRAPH_CREATED',this.onGraphCreated)
   }
 
   public initGraphPlugin({graph}: {graph: Graph}) {
@@ -47,6 +50,16 @@ export class Editor extends EventBus {
         grid: 15,
       },
     }));
+    this.graph?.use(new Keyboard({
+      enabled: true,
+      global: true,
+    }));
+  }
+
+  public onGraphCreated(){
+    this.graph?.on('node:selected', (node)=>{
+      console.log('当前选中节点',node)
+    });
   }
 }
 

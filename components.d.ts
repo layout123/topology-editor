@@ -8,10 +8,16 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('./src/components/ui/button/Button.vue')['default']
+    Collapsible: typeof import('./src/components/ui/collapsible/Collapsible.vue')['default']
+    CollapsibleContent: typeof import('./src/components/ui/collapsible/CollapsibleContent.vue')['default']
+    CollapsibleTrigger: typeof import('./src/components/ui/collapsible/CollapsibleTrigger.vue')['default']
     GridList: typeof import('./src/components/GridList.vue')['default']
+    Input: typeof import('./src/components/ui/input/Input.vue')['default']
     ResizableHandle: typeof import('./src/components/ui/resizable/ResizableHandle.vue')['default']
     ResizablePanelGroup: typeof import('./src/components/ui/resizable/ResizablePanelGroup.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScrollArea: typeof import('./src/components/ui/scroll-area/ScrollArea.vue')['default']
+    ScrollBar: typeof import('./src/components/ui/scroll-area/ScrollBar.vue')['default']
   }
 }

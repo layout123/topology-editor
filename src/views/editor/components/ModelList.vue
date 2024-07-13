@@ -1,10 +1,60 @@
 <template>
-  <div class="flex gap-4" >
-  <div class="w-20 h-10 bg-slate-400 cursor-move" v-drag:1>矩形</div>
-  <div class="w-20 h-10 bg-slate-400 cursor-move" v-drag:2>圆形</div>
-  <div class="w-20 h-10 bg-slate-400 cursor-move" v-drag:3>椭圆</div>
-  </div>
+  <ScrollArea class="rounded-md px-2">
+    <div class="relative w-full max-w-sm items-center p-2">
+      <Input
+        id="search"
+        v-model="searchText"
+        type="text"
+        autocomplete="off"
+        class="pl-8 h-8"
+        placeholder="请输入"
+      />
+      <span class="absolute start-0 inset-y-0 flex items-center justify-center px-4">
+        <Search class="size-4 text-muted-foreground" />
+      </span>
+    </div>
+    <Collapsible class="w-full space-y-2 px-2" :default-open="true">
+    <CollapsibleTrigger>
+      <div class="w-full p-2">基础模型</div>
+    </CollapsibleTrigger>
+    <CollapsibleContent class="w-full flex flex-wrap gap-4 px-2">
+      <div class="w-24 h-20 flex flex-col items-center justify-center cursor-move border rounded-sm" v-for="(model,index) in baseModel" v-drag:[model.value] :key="index">
+        {{ model.label }}
+      </div>
+    </CollapsibleContent>
+  </Collapsible>
+  <Collapsible class="w-full space-y-2  px-2" :default-open="true">
+    <CollapsibleTrigger>
+      <div class="w-full p-2">自定义模型</div>
+    </CollapsibleTrigger>
+    <CollapsibleContent>
+    </CollapsibleContent>
+  </Collapsible>
+  </ScrollArea>
 </template>
 
 <script setup lang="ts">
+import { Input } from '@/components/ui/input'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible'
+
+const searchText = ref('');
+
+const baseModel = [{
+  label: '矩形',
+  value: 1
+}, {
+  label: '圆形',
+  value: 2
+}, {
+  label: '椭圆',
+  value: 3
+}, {
+  label: '文字',
+  value: 4
+}]
 </script>

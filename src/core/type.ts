@@ -34,6 +34,12 @@ export interface ProjectEventArgs {
   };
 }
 
+export interface EditorEventArgs {
+  NODE_SELECTED: {
+    node: any;
+  };
+}
+
 export interface Context {
   app: App;
 }
@@ -56,7 +62,7 @@ export const enum CustomShape {
   CustomNode = 'customNode',
 }
 
-export interface AppContextEventArgs extends ProjectEventArgs {
+export interface AppContextEventArgs extends ProjectEventArgs, EditorEventArgs {
   GRAPH_CREATED: {
     graph: Graph;
     options: Graph.Options;
