@@ -1,4 +1,4 @@
-import { Graph } from '@antv/x6';
+import { Graph, Edge, Node, Rectangle, Size } from '@antv/x6';
 import { EventBus } from '@/utils/event';
 import AppContext from '../app';
 import { defaultGraphOptions } from '@/constants/graph';
@@ -29,6 +29,7 @@ export class Renderer extends EventBus {
       ...options,
     }
      this.graph = new Graph(metadata);
+     context.emit('GRAPH_CREATED',{ graph: this.graph , options: metadata })
   }
 
   //禁用/开启缩放
@@ -70,8 +71,57 @@ export class Renderer extends EventBus {
     return this.graph?.graphToLocal(x, y);
   }
 
-  public addNode(node: any) {
+  public addNode(node: Node.Metadata) {
     this.graph?.addNode(node);
+  }
+
+  public addEdge(edge: Edge.Metadata) {
+    this.graph?.addEdge(edge);
+  }
+
+  public async exportSvg(fileName: string, padding: number = 20, backgroundColor: string = '#fff'): Promise<void> {
+    const contentBBox = this.graph?.getContentBBox();
+    let preserveDimensions: Size | boolean = true;
+    let viewBox: Rectangle.RectangleLike | undefined = undefined;
+    padding = Math.max(padding, 20);
+    if (contentBBox) {
+      preserveDimensions = {
+        width: contentBBox.width + padding,
+        height: contentBBox.height + padding,
+      };
+      viewBox = {
+        x: contentBBox.x - padding / 2,
+        y: contentBBox.y - padding / 2,
+        ...preserveDimensions,
+      };
+    }
+
+    this.graph?.exportSVG(fileName, {
+      preserveDimensions,
+      viewBox,
+      beforeSerialize(svg) {
+        if (backgroundColor) {
+          svg.setAttribute('style', `background: ${backgroundColor}`);
+        }
+        return svg;
+      },
+    });
+  }
+
+  public async exportPNG(fileName: string, padding: number = 20, backgroundColor: string = '#fff'): Promise<void> {
+    this.graph?.exportPNG(fileName, {
+      quality: 0.92,
+      padding: Math.max(padding, 20),
+      backgroundColor,
+    });
+  }
+
+  public async exportJPEG(fileName?: string, padding: number = 20, backgroundColor: string = '#fff'): Promise<void> {
+    this.graph?.exportJPEG(fileName, {
+      quality: 0.92,
+      padding: Math.max(padding, 20),
+      backgroundColor,
+    });
   }
 }
 

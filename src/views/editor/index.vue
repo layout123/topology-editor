@@ -2,7 +2,7 @@
   <div class="w-full h-full overflow-hidden">
     <div class="w-full h-14">
       <ResizablePanelGroup direction="vertical">
-        <ResizablePanel>header</ResizablePanel>
+        <ResizablePanel><TopBar /></ResizablePanel>
         <ResizableHandle />
       </ResizablePanelGroup>
     </div>
@@ -24,6 +24,7 @@
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable';
 import ModelList from './components/ModelList.vue';
 import WorkSpace from './components/WorkSpace.vue'
+import TopBar from './components/TopBar.vue'
 import { useApp } from '@/hooks/useApp';
 
 useApp()
