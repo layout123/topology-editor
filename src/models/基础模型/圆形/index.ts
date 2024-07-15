@@ -3,8 +3,8 @@ import { BaseShape } from '@/core/type';
 export const node = {
   group: '基础模型',
   node:  {
-    name: '矩形',
-    shape: BaseShape.Rect,
+    name: '圆形',
+    shape: BaseShape.Circle,
     width: 100,
     height: 40,
     attrs: {

@@ -23,8 +23,6 @@ export const customs: Customs = Object.entries(modulesFiles).reduce(
   {}
 );
 
-console.log('customs', customs);
-
 export const elementGroups: ElementGroup[] = Object.values(customs).reduce((elementGroups, { node }) => {
   const elementGroup = elementGroups.find(({ group }) => group === node.group);
   if (elementGroup) {

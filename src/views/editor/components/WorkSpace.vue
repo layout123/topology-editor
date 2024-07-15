@@ -21,11 +21,11 @@
 
   const onDrop = (event: DragEvent) => {
   event.preventDefault();
-  console.log('onDrop', event);
   if (!canvasRef.value || !app) return;
-  const shapeType = Number(event.dataTransfer?.getData('shapeType'));
-  const shape = shapeMapping[shapeType];
-  if (!shape) return;
+  const model = JSON.parse(event.dataTransfer?.getData('shapeType') as string);
+
+  if (!model) return;
+  const { shape } = model
 
   const { left, top } = canvasRef.value.getBoundingClientRect();
   const x = event.clientX - left;
@@ -49,7 +49,7 @@
       label: {
         fontSize: 12,
         fill: '#262626',
-        text: shapeMapping[shapeType]
+        text: shape
       },
     },
   });

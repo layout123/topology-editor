@@ -3,7 +3,7 @@ import { BaseShape } from '@/core/type';
 export const node = {
   group: '自定义模型',
   node:  {
-    name: '矩形',
+    name: '自定义模型01',
     shape: BaseShape.Rect,
     width: 100,
     height: 40,
