@@ -5,24 +5,15 @@
   <script setup lang="ts">
   import { injectStrictWithSelf } from '@/hooks/useInjectKey';
   import { AppKey } from '@/constants/inject-keys';
-  import { BaseShape } from '@/core/type';
 
   const { app } = injectStrictWithSelf(AppKey)
 
   const canvasRef = ref<HTMLDivElement | null>(null);
  
-  const shapeMapping: Record<number, BaseShape> = {
-  1: BaseShape.Rect,
-  2: BaseShape.Circle,
-  3: BaseShape.Ellipse,
-  4: BaseShape.Polygon,
-  5: BaseShape.Polyline,
-};
-
   const onDrop = (event: DragEvent) => {
   event.preventDefault();
   if (!canvasRef.value || !app) return;
-  const model = JSON.parse(event.dataTransfer?.getData('shapeType') as string);
+  const model = JSON.parse(event.dataTransfer?.getData('model') as string);
 
   if (!model) return;
   const { shape } = model

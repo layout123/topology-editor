@@ -37,18 +37,4 @@ import {
 import { elementGroups } from '@/models';
 import { Search } from 'lucide-vue-next'
 const searchText = ref('');
-
-const baseModel = [{
-  label: '矩形',
-  value: 1
-}, {
-  label: '圆形',
-  value: 2
-}, {
-  label: '椭圆',
-  value: 3
-}, {
-  label: '文字',
-  value: 4
-}]
 </script>
