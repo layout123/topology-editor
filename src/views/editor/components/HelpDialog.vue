@@ -50,7 +50,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
 
 import { MousePointer, Mouse } from 'lucide-vue-next'
