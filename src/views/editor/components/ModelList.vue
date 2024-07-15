@@ -13,21 +13,14 @@
         <Search class="size-4 text-muted-foreground" />
       </span>
     </div>
-    <Collapsible class="w-full space-y-2 px-2" :default-open="true">
+    <Collapsible class="w-full space-y-2 px-2" v-for="{ group, nodes } in elementGroups" :default-open="true" :key="group">
     <CollapsibleTrigger>
-      <div class="w-full p-2">基础模型</div>
+      <div class="w-full p-2">{{ group }}</div>
     </CollapsibleTrigger>
     <CollapsibleContent class="w-full flex flex-wrap gap-4 px-2">
-      <div class="w-24 h-20 flex flex-col items-center justify-center cursor-move border rounded-sm" v-for="(model,index) in baseModel" v-drag:[model.value] :key="index">
-        {{ model.label }}
+      <div class="w-24 h-20 flex flex-col items-center justify-center cursor-move border rounded-sm" v-for="(model,index) in nodes" v-drag:[model.shape] :key="index">
+        {{ model.name }}
       </div>
-    </CollapsibleContent>
-  </Collapsible>
-  <Collapsible class="w-full space-y-2  px-2" :default-open="true">
-    <CollapsibleTrigger>
-      <div class="w-full p-2">自定义模型</div>
-    </CollapsibleTrigger>
-    <CollapsibleContent>
     </CollapsibleContent>
   </Collapsible>
   </ScrollArea>
@@ -41,9 +34,9 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible'
-
+import { elementGroups } from '@/models';
 import { Search } from 'lucide-vue-next'
-
+console.log('elementGroups',elementGroups);
 const searchText = ref('');
 
 const baseModel = [{

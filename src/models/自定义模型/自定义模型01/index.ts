@@ -1,7 +1,7 @@
 import { BaseShape } from '@/core/type';
 
 export const node = {
-  group: '基础模型',
+  group: '自定义模型',
   node:  {
     name: '矩形',
     shape: BaseShape.Rect,
