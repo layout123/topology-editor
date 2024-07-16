@@ -4,5 +4,10 @@
   
   <script setup lang="ts">
   import { Button } from '@/components/ui/button'
+
+  const nodeInject = inject('getNode') || null;
+  onMounted(() => {
+    console.log(nodeInject);
+  })
 </script>
   
