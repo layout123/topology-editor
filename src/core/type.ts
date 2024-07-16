@@ -52,6 +52,17 @@ export namespace Cmd {
   }
 }
 
+export enum CmdConst {
+  Undo = 'undo',
+  Redo = 'redo',
+  CanUndo = 'canUndo',
+  CanRedo = 'canRedo',
+}
+
+export enum ExportConst {
+  JPEG = 'jpeg',
+  PNG = 'png',
+}
 
 export interface Command {
   undo: () => void;

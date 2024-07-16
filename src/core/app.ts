@@ -2,18 +2,24 @@ import { EventBus } from '@/utils/event';
 
 import { Renderer } from './renderer/renderer';
 import { Editor } from './editor/editor';
-import { AppContextEventArgs, Cmd } from './type';
+import { Project } from './base/project';
+import { AppContextEventArgs, Cmd, CmdConst, ExportConst, ProjectData } from './type';
 
 export class App extends EventBus<AppContextEventArgs> {
   public renderer: Renderer;
   public editor: Editor;
   public domElement: HTMLDivElement;
+  public project: Project;
   constructor() {
     super();
     this.domElement = document.createElement('div');
     this.domElement.setAttribute('style', 'width: 100%; height: 100%; position: relative; overflow: hidden;');
     this.editor = new Editor(this);
     this.renderer = new Renderer(this);
+    this.project = new Project({
+      edges: [],
+      nodes: [],
+    });
 
     const resizeObserver = new ResizeObserver(([domElement]) => {
       this.renderer.emit('graph:resize', {
@@ -21,6 +27,15 @@ export class App extends EventBus<AppContextEventArgs> {
       });
     });
     resizeObserver.observe(this.domElement);
+
+    this.project.on('PROJECT_ADD_NODE', ({node})=>{
+      console.log('xxxx');
+      this.renderer.addNode(node)
+    })
+
+    this.project.on('PROJECT_ADD_EDGE',({edge})=>{
+      this.renderer.addEdge(edge)
+    })
   }
 
   public mounted(container: HTMLDivElement) {
@@ -29,25 +44,37 @@ export class App extends EventBus<AppContextEventArgs> {
 
   public execute<T extends Cmd.Options>(command: string, options?: T): any {
     switch(command){
-      case 'undo':
+      case CmdConst.Undo:
         this.renderer.graph?.undo()
         break;
-      case 'redo':
+      case CmdConst.Redo:
         this.renderer.graph?.redo()
         break;
-      case 'canUndo':
+      case CmdConst.CanUndo:
         return this.renderer.graph?.canUndo()
-      case 'canRedo':
+      case CmdConst.CanRedo:
         return this.renderer.graph?.canRedo()
     }
   }
 
+  public initProject(projectData: ProjectData) {
+    this.project = new Project(projectData);
+  }
+
+  public addNode(node: any) {
+    this.project.addNode(node);
+  }
+
+  public addEdge(edge: any) {
+    this.project.addEdge(edge);
+  }
+
   public async export (fileName: string, type: 'jpeg' | 'png' | 'svg', padding: number = 20, backgroundColor: string = '#fff') {
     switch (type) {
-      case 'jpeg':
+      case ExportConst.JPEG:
         await this.renderer.exportJPEG(fileName, padding, backgroundColor);
         break;
-      case 'png':
+      case ExportConst.PNG:
         await this.renderer.exportPNG(fileName, padding, backgroundColor);
     }
   }

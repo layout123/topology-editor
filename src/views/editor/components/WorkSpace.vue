@@ -9,6 +9,7 @@
   import {register, getTeleport } from '@antv/x6-vue-shape';
   import Custom1 from '@/models/自定义模型/自定义模型01/custom.vue';
   import Custom2 from '@/models/自定义模型/自定义模型02/custom.vue';
+  import data from './mock.json';
 
   const { app } = injectStrictWithSelf(AppKey)
 
@@ -42,7 +43,7 @@
   const x = event.clientX - left;
   const y = event.clientY - top;
   const position = app.renderer.pageToLocal(x, y);
-  app.renderer.addNode({
+  app.addNode({
     id: Math.floor(Math.random() * 16777215).toString(16),
     shape,
     x:position?.x || 0,

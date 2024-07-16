@@ -15,14 +15,27 @@ export class Project extends EventBus<ProjectEventArgs> {
     this.nodes = projectData.nodes ?? [];
     this.edges = projectData.edges ?? [];
     this.initProject();
+
+    this.on('PROJECT_ADD_NODE',()=>{
+      console.log('xxxxxxx')
+    })
   }
   public addNode(node: any) {
     this.nodes.push(node);
-    new Node(this, node)
+    // new Node(this, node)
+    this.emit('PROJECT_ADD_NODE', {
+      project: this,
+      node,
+    });
+    console.log('this.nodes',this.nodes)
   }
   public addEdge(edge: any) {
     this.edges.push(edge);
-    new Edge(this, edge);
+    // new Edge(this, edge);
+    this.emit('PROJECT_ADD_EDGE', {
+      project: this,
+      edge,
+    });
   }
 
   public initProject() {

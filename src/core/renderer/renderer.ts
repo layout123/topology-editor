@@ -72,11 +72,11 @@ export class Renderer extends EventBus {
     return this.graph?.graphToLocal(x, y);
   }
 
-  public addNode(node: Node.Metadata) {
+  public async addNode(node: Node.Metadata) {
     this.graph?.addNode(node);
   }
 
-  public addEdge(edge: Edge.Metadata) {
+  public async addEdge(edge: Edge.Metadata) {
     this.graph?.addEdge(edge);
   }
 

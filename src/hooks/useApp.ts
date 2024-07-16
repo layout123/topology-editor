@@ -1,5 +1,5 @@
 import { AppKey, CommandKey } from '@/constants/inject-keys';
-import { Cmd } from '@/core/type';
+import { Cmd, CmdConst } from '@/core/type';
 import { App } from '@/core';
 
 export const useApp = () => {
@@ -10,10 +10,10 @@ export const useApp = () => {
     });
 
     provide(CommandKey, {
-      undo:() => app.execute<Cmd.Undo>('undo'),
-      redo:() => app.execute<Cmd.Redo>('redo'),
-      canUndo:() => app.execute<Cmd.CanUndo>('canUndo'),
-      canRedo:() => app.execute<Cmd.CanRedo>('canRedo'),
+      undo:() => app.execute<Cmd.Undo>(CmdConst.Undo),
+      redo:() => app.execute<Cmd.Redo>(CmdConst.Redo),
+      canUndo:() => app.execute<Cmd.CanUndo>(CmdConst.CanUndo),
+      canRedo:() => app.execute<Cmd.CanRedo>(CmdConst.CanRedo),
     })
 };
 

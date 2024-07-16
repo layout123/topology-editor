@@ -1,0 +1,93 @@
+{
+  "edges": [],
+  "nodes": [
+    {
+      "id": "2dbec2",
+      "shape": "circle",
+      "x": 194.296875,
+      "y": 118,
+      "width": 100,
+      "height": 40,
+      "attrs": {
+        "body": {
+          "stroke": "#5F95FF",
+          "strokeWidth": 1,
+          "fill": "#f6cf95",
+          "rx": 0,
+          "ry": 0
+        },
+        "label": {
+          "fontSize": 12,
+          "fill": "#262626",
+          "text": "circle"
+        }
+      }
+    },
+    {
+      "id": "96ff2f",
+      "shape": "rect",
+      "x": 368.296875,
+      "y": 199,
+      "width": 100,
+      "height": 40,
+      "attrs": {
+        "body": {
+          "stroke": "#5F95FF",
+          "strokeWidth": 1,
+          "fill": "#fb4c88",
+          "rx": 0,
+          "ry": 0
+        },
+        "label": {
+          "fontSize": 12,
+          "fill": "#262626",
+          "text": "rect"
+        }
+      }
+    },
+    {
+      "id": "3dfea2",
+      "shape": "circle",
+      "x": 632.296875,
+      "y": 160,
+      "width": 100,
+      "height": 40,
+      "attrs": {
+        "body": {
+          "stroke": "#5F95FF",
+          "strokeWidth": 1,
+          "fill": "#9cc6db",
+          "rx": 0,
+          "ry": 0
+        },
+        "label": {
+          "fontSize": 12,
+          "fill": "#262626",
+          "text": "circle"
+        }
+      }
+    },
+    {
+      "id": "2fd7e7",
+      "shape": "custom-vue-node-01",
+      "x": 474.296875,
+      "y": 322,
+      "width": 100,
+      "height": 40,
+      "attrs": {
+        "body": {
+          "stroke": "#5F95FF",
+          "strokeWidth": 1,
+          "fill": "#f59347",
+          "rx": 0,
+          "ry": 0
+        },
+        "label": {
+          "fontSize": 12,
+          "fill": "#262626",
+          "text": "custom-vue-node-01"
+        }
+      }
+    }
+  ]
+}
