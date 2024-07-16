@@ -7,6 +7,7 @@ export const node = {
     shape: BaseShape.Rect,
     width: 100,
     height: 40,
+    image: '',
     attrs: {
       body: {
         stroke: '#5F95FF',
@@ -19,6 +20,26 @@ export const node = {
         fontSize: 12,
         fill: '#262626',
       },
+    },
+    ports: {
+      groups: {
+        group1: {
+          position: {
+            name: 'absolute',
+            args: { x: 0, y: 0 },
+          },
+        },
+      },
+      items: [
+        {
+          group: 'group1',
+          args: {
+            x: '60%',
+            y: 32,
+            angle: 45,
+          },
+        },
+      ],
     },
   }
 };

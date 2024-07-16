@@ -1,12 +1,32 @@
 <template>
     <div ref="canvasRef" class="w-full h-full" @drop="onDrop" @dragover.prevent></div>
+    <TeleportContainer />
   </template>
   
   <script setup lang="ts">
   import { injectStrictWithSelf } from '@/hooks/useInjectKey';
   import { AppKey } from '@/constants/inject-keys';
+  import {register, getTeleport } from '@antv/x6-vue-shape';
+  import Custom1 from '@/models/自定义模型/自定义模型01/custom.vue';
+  import Custom2 from '@/models/自定义模型/自定义模型02/custom.vue';
 
   const { app } = injectStrictWithSelf(AppKey)
+
+  register({
+    shape: 'custom-vue-node-01',
+    width: 200,
+    height: 100,
+    component: Custom1,
+  })
+
+  register({
+    shape: 'custom-vue-node-02',
+    width: 200,
+    height: 100,
+    component: Custom2,
+  })
+
+  const TeleportContainer = getTeleport()
 
   const canvasRef = ref<HTMLDivElement | null>(null);
  

@@ -4,7 +4,7 @@ export const node = {
   group: '自定义模型',
   node:  {
     name: '自定义模型01',
-    shape: BaseShape.Rect,
+    shape: 'custom-vue-node-01',
     width: 100,
     height: 40,
     attrs: {
