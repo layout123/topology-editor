@@ -18,7 +18,7 @@
   const helpDialog = useCommandComponent(HelpDialog)
 
   const { app } = injectStrictWithSelf(AppKey)
-
+  
   const exportPng = () => {
     app.export('test', 'png')
   }

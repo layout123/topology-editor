@@ -2,7 +2,7 @@ import { EventBus } from '@/utils/event';
 
 import { Renderer } from './renderer/renderer';
 import { Editor } from './editor/editor';
-import { AppContextEventArgs } from './type';
+import { AppContextEventArgs, Cmd } from './type';
 
 export class App extends EventBus<AppContextEventArgs> {
   public renderer: Renderer;
@@ -25,6 +25,21 @@ export class App extends EventBus<AppContextEventArgs> {
 
   public mounted(container: HTMLDivElement) {
     container.appendChild(this.domElement);
+  }
+
+  public execute<T extends Cmd.Options>(command: string, options?: T): any {
+    switch(command){
+      case 'undo':
+        this.renderer.graph?.undo()
+        break;
+      case 'redo':
+        this.renderer.graph?.redo()
+        break;
+      case 'canUndo':
+        return this.renderer.graph?.canUndo()
+      case 'canRedo':
+        return this.renderer.graph?.canRedo()
+    }
   }
 
   public async export (fileName: string, type: 'jpeg' | 'png' | 'svg', padding: number = 20, backgroundColor: string = '#fff') {

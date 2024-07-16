@@ -19,6 +19,18 @@
             <div>粘贴节点</div>
           </div>
           <div class="grid grid-cols-2 py-2">
+            <div>Ctrl + Z</div>
+            <div>撤回</div>
+          </div>
+          <div class="grid grid-cols-2 py-2">
+            <div>Ctrl + Y</div>
+            <div>取消撤回</div>
+          </div>
+          <div class="grid grid-cols-2 py-2">
+            <div>Ctrl + X</div>
+            <div>画布适应居中</div>
+          </div>
+          <div class="grid grid-cols-2 py-2">
             <div><span>Ctrl +</span> <MousePointer class="inline-block" /></div>
             <div>拖拽画布</div>
           </div>

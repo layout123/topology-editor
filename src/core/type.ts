@@ -34,6 +34,32 @@ export interface ProjectEventArgs {
   };
 }
 
+export namespace Cmd {
+  export interface Options {
+    [key: string]: any;
+  }
+
+  export interface Undo extends Options {
+  }
+
+  export interface Redo extends Options {
+  }
+
+  export interface CanUndo extends Options {
+  }
+
+  export interface CanRedo extends Options {
+  }
+}
+
+
+export interface Command {
+  undo: () => void;
+  redo: () => void;
+  canUndo: () => boolean;
+  canRedo: () => boolean;
+}
+
 export interface EditorEventArgs {
   NODE_SELECTED: {
     node: any;
