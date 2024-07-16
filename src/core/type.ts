@@ -107,17 +107,12 @@ export interface NodePortConfig {
   };
 }
 
-export interface UnitConfig extends Cell {
-  name: string;
-  shape:
-    | BaseShape.Circle
-    | BaseShape.Rect
-    | BaseShape.Ellipse
-    | BaseShape.Polygon
-    | BaseShape.Polyline
-    | BaseShape.Path
-    | BaseShape.Image
-    | BaseShape.HTML
-    | CustomShape.CustomNode;
-  props: Record<string, any>;
+export interface UnitConfig {
+  props?: Record<string, any>;
+}
+
+export interface ProjectData {
+  nodes: Node[];
+  edges: Edge[];
+  graph?: Graph.Options;
 }

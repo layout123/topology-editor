@@ -8,7 +8,7 @@ export class Node extends Unit {
   public readonly node: CustomNode;
   public port: CustomPort[];
   constructor(project: Project, config: UnitConfig) {
-    super(project, config);
+    super(config);
     this.node = new CustomNode(this);
     this.port = [new CustomPort()];
   }
