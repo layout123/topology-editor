@@ -1,7 +1,5 @@
 <template>
-    <div class="h-full flex items-center justify-center">
-     <Button>自定义模型</Button>
-    </div>
+     <Button class="w-full h-full">自定义模型</Button>
   </template>
   
   <script setup lang="ts">

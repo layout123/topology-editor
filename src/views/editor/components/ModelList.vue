@@ -36,5 +36,6 @@ import {
 } from '@/components/ui/collapsible'
 import { elementGroups } from '@/models';
 import { Search } from 'lucide-vue-next'
+
 const searchText = ref('');
 </script>
