@@ -6,8 +6,8 @@
         <span className="text-sm mx-2">{{ (curZoom * 100).toFixed(0) + '%' }}</span>
         <Minus @click="setZoom(-0.1)" className="w-4 h-4"></Minus>
       </Button>
-      <Undo className="w-4 h-4"></Undo>
-      <Redo className="w-4 h-4"></Redo>
+      <Undo :disabled="!canDo.canUndo" className="w-4 h-4" @click="undo"></Undo>
+      <Redo :disabled="!canDo.canRedo" className="w-4 h-4" @click="redo"></Redo>
     </div>
    </div>
   </template>
@@ -22,12 +22,31 @@
 
   const curZoom = ref(app.renderer.getZoom() ?? 1)
 
+  const canDo = reactive({
+    canUndo: app.renderer.graph?.canUndo(),
+    canRedo: app.renderer.graph?.canRedo(),
+  })
+
   const setZoom = (zoom:number) => {
     if(curZoom.value <= 0 || curZoom.value >= 2) return
     const getRoom = curZoom.value + zoom;
     app.renderer.setZoom(getRoom)
     curZoom.value = getRoom
   }
+
+  const undo = () => {
+    canDo.canUndo && app.renderer.graph?.undo()
+  }
+  const redo = () => {
+   canDo.canRedo && app.renderer.graph?.redo()
+  }
+
+  onMounted(() => {
+    app.renderer.graph?.on('history:change',()=>{
+      canDo.canRedo = app.renderer.graph?.canRedo()
+      canDo.canUndo = app.renderer.graph?.canUndo()
+    })
+  })
 
   </script>
   

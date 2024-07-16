@@ -29,6 +29,7 @@ export class Renderer extends EventBus {
       ...options,
     }
      this.graph = new Graph(metadata);
+
      context.emit('GRAPH_CREATED',{ graph: this.graph , options: metadata })
   }
 
