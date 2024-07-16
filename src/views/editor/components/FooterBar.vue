@@ -1,30 +1,33 @@
 <template>
-    <div class="h-full flex justify-end items-center px-8 relative">
-    <CircleHelp class="absolute left-4 top-4 cursor-help" @click="openHelpDialog" />
-    <Button @click="exportPng">导出</Button>
+   <div className="w-80 hover:w-96 h-14 border bg-background shadow rounded-2xl hover:shadow-xl fixed bottom-10 left-1/2 -translate-x-1/2 duration-300">
+    <div className="w-full h-full flex items-center px-4 gap-4 overflow-hidden">
+      <Button> 
+        <Plus @click="setZoom(0.1)" className="w-4 h-4"></Plus>
+        <span className="text-sm mx-2">{{ (curZoom * 100).toFixed(0) + '%' }}</span>
+        <Minus @click="setZoom(-0.1)" className="w-4 h-4"></Minus>
+      </Button>
+      <Undo className="w-4 h-4"></Undo>
+      <Redo className="w-4 h-4"></Redo>
     </div>
+   </div>
   </template>
   
   <script setup lang="ts">
   import { injectStrictWithSelf } from '@/hooks/useInjectKey';
   import { AppKey } from '@/constants/inject-keys';
   import { Button } from '@/components/ui/button'
-  import { CircleHelp } from 'lucide-vue-next'
-
-  import { useCommandComponent } from '@/hooks/useCommandComponent';
-
-  import HelpDialog from './HelpDialog.vue'
-
-  const helpDialog = useCommandComponent(HelpDialog)
+  import { Undo, Redo, Plus, Minus } from 'lucide-vue-next'
 
   const { app } = injectStrictWithSelf(AppKey)
 
-  const exportPng = () => {
-    app.export('test', 'png')
+  const curZoom = ref(app.renderer.getZoom() ?? 1)
+
+  const setZoom = (zoom:number) => {
+    if(curZoom.value <= 0 || curZoom.value >= 2) return
+    const getRoom = curZoom.value + zoom;
+    app.renderer.setZoom(getRoom)
+    curZoom.value = getRoom
   }
 
-  const openHelpDialog = () => {
-    helpDialog()
-  }
   </script>
   

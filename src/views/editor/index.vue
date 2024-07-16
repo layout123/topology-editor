@@ -17,6 +17,7 @@
       <ResizableHandle with-handle />
       <ResizablePanel :default-size="15"></ResizablePanel>
     </ResizablePanelGroup>
+    <FooterBar />
   </div>
 </template>
 
@@ -25,6 +26,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/componen
 import ModelList from './components/ModelList.vue';
 import WorkSpace from './components/WorkSpace.vue'
 import TopBar from './components/TopBar.vue'
+import FooterBar from './components/FooterBar.vue'
 import { useApp } from '@/hooks/useApp';
 
 useApp()
