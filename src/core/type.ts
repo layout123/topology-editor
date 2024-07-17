@@ -1,4 +1,4 @@
-import { Cell, Graph } from '@antv/x6';
+import { Cell, Dom, Graph } from '@antv/x6';
 import App from './app';
 import { Edge } from './base/Edge';
 import { Node } from './base/Node';
@@ -31,6 +31,34 @@ export interface ProjectEventArgs {
   PROJECT_UPDATE_EDGE: {
     project: Project;
     edge: Edge;
+  };
+}
+
+export interface RendererEventArgs {
+  GRAPH_CREATED: {
+    graph: Graph;
+    options: Graph.Options;
+  };
+  GRAPH_MOUNTED: {
+    domElement: HTMLDivElement;
+  };
+  GRAPH_RESIZE: any;
+  GRAPH_CHANGE: {}
+}
+
+export interface EditorEventArgs {
+  NODE_SELECTED: {
+    node: any;
+  };
+}
+
+export interface AppContextEventArgs extends ProjectEventArgs, EditorEventArgs, RendererEventArgs {
+  GRAPH_CREATED: {
+    graph: Graph;
+    options: Graph.Options;
+  };
+  GRAPH_MOUNTED: {
+    domElement: HTMLDivElement;
   };
 }
 
@@ -71,12 +99,6 @@ export interface Command {
   canRedo: () => boolean;
 }
 
-export interface EditorEventArgs {
-  NODE_SELECTED: {
-    node: any;
-  };
-}
-
 export interface Context {
   app: App;
 }
@@ -97,16 +119,6 @@ export const enum BaseShape {
 
 export const enum CustomShape {
   CustomNode = 'customNode',
-}
-
-export interface AppContextEventArgs extends ProjectEventArgs, EditorEventArgs {
-  GRAPH_CREATED: {
-    graph: Graph;
-    options: Graph.Options;
-  };
-  GRAPH_MOUNTED: {
-    domElement: HTMLDivElement;
-  };
 }
 
 export interface AppConfig {
@@ -145,6 +157,7 @@ export interface NodePortConfig {
 }
 
 export interface UnitConfig {
+  id: string;
   props?: Record<string, any>;
 }
 

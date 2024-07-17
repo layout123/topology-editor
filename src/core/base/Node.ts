@@ -5,10 +5,12 @@ import { CustomPort } from './CustomPort';
 import { Project } from './project';
 import { Unit } from './Unit';
 export class Node extends Unit {
+  public readonly id: string;
   public readonly node: CustomNode;
   public port: CustomPort[];
   constructor(project: Project, config: UnitConfig) {
     super(config);
+    this.id = config.id;
     this.node = new CustomNode(this);
     this.port = [new CustomPort()];
   }

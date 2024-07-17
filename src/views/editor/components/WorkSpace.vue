@@ -68,8 +68,13 @@
 };
 
 onMounted(() => {
-  if (!canvasRef.value) return;
-  app.mounted(canvasRef.value)
+  if (canvasRef.value){
+    app.mounted(canvasRef.value)
+    app.initProject(JSON.parse(localStorage.getItem('projectData') as string) || data as any)
+    app.on('GRAPH_CHANGE',()=>{
+      window.localStorage.setItem('projectData', JSON.stringify(app.project.formatProjectData()))
+})
+  };
 })
   </script>
   

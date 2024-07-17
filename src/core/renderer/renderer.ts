@@ -2,7 +2,8 @@ import { Graph, Edge, Node, Rectangle, Size } from '@antv/x6';
 import { EventBus } from '@/utils/event';
 import AppContext from '../app';
 import { defaultGraphOptions } from '@/constants/graph';
-export class Renderer extends EventBus {
+import { RendererEventArgs } from '../type';
+export class Renderer extends EventBus<RendererEventArgs> {
   public graph?: Graph;
   public options?: Graph.Options;
   public appContext: AppContext;
@@ -11,14 +12,25 @@ export class Renderer extends EventBus {
 
     this.appContext = context;
     this.createGraph(context);
+    
+    this.on('GRAPH_RESIZE',()=>{
+      this.graph?.resize()
+    })
+    this.graph?.on('cell:changed',()=>{
+      this.emit('GRAPH_CHANGE',{})
+    })
 
-    this.on('graph:resize', ({ width, height }) => {
-      this.graph?.resize(width, height);
-    });
+    this.graph?.on('node:moved',()=>{
+      this.emit('GRAPH_CHANGE',{})
+    })
+
+    this.graph?.on('edge:moved',()=>{
+      this.emit('GRAPH_CHANGE',{})
+    })
+
   }
   public createGraph(context: AppContext, options?:Graph.Options) {
-    this.graph?.off();
-    this.graph?.dispose();
+    this.destroy()
 
     const graphElement = document.createElement('div');
     graphElement.setAttribute('style', 'width: 100%; height: 100%; position: relative; overflow: hidden;');
@@ -123,6 +135,11 @@ export class Renderer extends EventBus {
       padding: Math.max(padding, 20),
       backgroundColor,
     });
+  }
+
+  public destroy() {
+    this.graph?.off();
+    this.graph?.dispose();
   }
 }
 

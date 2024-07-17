@@ -22,19 +22,24 @@ export class App extends EventBus<AppContextEventArgs> {
     });
 
     const resizeObserver = new ResizeObserver(([domElement]) => {
-      this.renderer.emit('graph:resize', {
+      this.renderer.emit('GRAPH_RESIZE', {
         ...domElement.contentRect,
       });
     });
     resizeObserver.observe(this.domElement);
 
     this.project.on('PROJECT_ADD_NODE', ({node})=>{
-      console.log('xxxx');
       this.renderer.addNode(node)
+      this.emit('GRAPH_CHANGE',{})
     })
 
     this.project.on('PROJECT_ADD_EDGE',({edge})=>{
       this.renderer.addEdge(edge)
+      this.emit('GRAPH_CHANGE',{})
+    })
+
+    this.renderer.on('GRAPH_CHANGE',()=>{
+      this.emit('GRAPH_CHANGE',{})
     })
   }
 
@@ -58,7 +63,7 @@ export class App extends EventBus<AppContextEventArgs> {
   }
 
   public initProject(projectData: ProjectData) {
-    this.project = new Project(projectData);
+    this.project.initProject(projectData);
   }
 
   public addNode(node: any) {
