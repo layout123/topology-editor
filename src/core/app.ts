@@ -1,4 +1,5 @@
 import { EventBus } from '@/utils/event';
+import { generateId } from '@/utils/number';
 
 import { Renderer } from './renderer/renderer';
 import { Editor } from './editor/editor';
@@ -66,12 +67,19 @@ export class App extends EventBus<AppContextEventArgs> {
     this.project.initProject(projectData);
   }
 
-  public addNode(node: any) {
+  public addNode(model:any, position:{x:number, y:number}) {
+    const node = {id:generateId(), ...model, position}
     this.project.addNode(node);
   }
 
   public addEdge(edge: any) {
     this.project.addEdge(edge);
+  }
+
+  public removeElement(element:any){
+    this.renderer.graph?.removeNode(element.node.id)
+    this.project.deleteNode(element.node)
+    this.emit('GRAPH_CHANGE',{})
   }
 
   public async export (fileName: string, type: 'jpeg' | 'png' | 'svg', padding: number = 20, backgroundColor: string = '#fff') {

@@ -1,10 +1,15 @@
-// useKeyboard.ts
 import { onMounted, onUnmounted } from 'vue';
 
-export const useKeyboard =(key: string, callback: () => void) => {
+export const useKeyboard = (keys: string[], callback: () => void, requireCtrlMeta: boolean = true) => {
   const handler = (event: KeyboardEvent) => {
-    if (event.ctrlKey && event.key.toLowerCase() === key.toLowerCase()) {
-      callback();
+    for (let key of keys) {
+      if (
+        (requireCtrlMeta && (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === key.toLowerCase()) ||
+        (!requireCtrlMeta && event.key.toLowerCase() === key.toLowerCase())
+      ) {
+        callback();
+        break;
+      }
     }
   };
 

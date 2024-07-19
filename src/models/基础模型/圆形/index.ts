@@ -6,7 +6,7 @@ export const node = {
     name: '圆形',
     shape: BaseShape.Circle,
     width: 100,
-    height: 40,
+    height: 100,
     attrs: {
       body: {
         stroke: '#5F95FF',

@@ -68,13 +68,36 @@ export class Editor extends EventBus<EditorEventArgs> {
   }
 
   public onGraphCreated(){
-    this.graph?.on('node:selected', (element)=>{
-      // element.node.setPortProp(element.node.id, 'attrs/circle/style', {
-      //   visibility: 'visible',
-      // });
+    if(!this.graph) return;
+
+    this.graph.on('node:selected', (element)=>{
       this.emit('ELEMENT_SELECTED',element)
     });
-    this.graph?.bindKey('ctrl+c', () => {
+
+    this.graph.on('node:mouseenter', ({ e, node, view })=>{
+    });
+
+    this.graph.on('edge:mouseenter', ({ e, edge, view })=>{
+    });
+
+    this.graph.on('node:mouseleave', ({ e, node, view })=>{
+    });
+
+    this.graph.on('edge:mouseleave', ({ e, edge, view })=>{
+    });
+
+    this.graph.on('node:contextmenu', ({ e, node, view })=>{
+      console.log('node',node)
+    });
+
+    this.graph.on('edge:contextmenu', ({ e, edge, view })=>{
+    });
+
+    this.graph.on('blank:contextmenu', ({ e })=>{
+      console.log('e', e);
+    });
+
+    this.graph.bindKey('ctrl+c', () => {
       const cells = this.graph?.getSelectedCells()
       if (cells?.length) {
         this.graph?.copy(cells)
@@ -82,7 +105,7 @@ export class Editor extends EventBus<EditorEventArgs> {
       return false
     })
 
-    this.graph?.bindKey('ctrl+v', () => {
+    this.graph.bindKey('ctrl+v', () => {
       if (!this.graph?.isClipboardEmpty()) {
         const cells = this.graph?.paste({ offset: 32 })!
         this.graph?.cleanSelection()

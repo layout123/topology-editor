@@ -35,6 +35,11 @@ export class Project extends EventBus<ProjectEventArgs> {
       edge,
     });
   }
+   
+  public deleteNode(node: any) {
+    this.nodes = this.nodes.filter((item) => item.id !== node.id);
+    this.elementMap.delete(node.id);
+  }
 
   public initProject(projectData: ProjectData) {
     projectData.nodes?.forEach((node) => {
@@ -44,8 +49,8 @@ export class Project extends EventBus<ProjectEventArgs> {
     projectData.edges?.forEach((edge) => {
       this.addEdge(edge);
     });
-
   }
+
 
   public formatProjectData(): ProjectData {
     return {

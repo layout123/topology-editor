@@ -5,8 +5,8 @@ export const node = {
   node:  {
     name: '矩形',
     shape: BaseShape.Rect,
-    width: 100,
-    height: 40,
+    width: 200,
+    height: 100,
     image: '',
     attrs: {
       body: {

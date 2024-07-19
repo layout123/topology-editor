@@ -6,7 +6,7 @@ export const node = {
     name: '椭圆',
     shape: BaseShape.Ellipse,
     width: 100,
-    height: 40,
+    height: 80,
     attrs: {
       body: {
         stroke: '#5F95FF',

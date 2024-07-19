@@ -10,20 +10,24 @@
   import { AppKey, CommandKey } from '@/constants/inject-keys';
   import { useKeyboard } from '@/hooks/useKeyboard';
 
-  const { app } = injectStrictWithSelf(AppKey)
+  const { app, selectedElement } = injectStrictWithSelf(AppKey)
   const { undo, redo, canRedo, canUndo } = injectStrictWithSelf(CommandKey)
 
-  useKeyboard('z',()=>{
+  useKeyboard(['ctrl','z'],()=>{
     canUndo() && undo();
   })
 
-  useKeyboard('y',()=>{
+  useKeyboard(['ctrl','y'],()=>{
     canRedo() && redo();
   })
 
-  useKeyboard('x',()=>{
+  useKeyboard(['ctrl','x'],()=>{
     app.renderer.zoomToFit();
   })
+
+  useKeyboard(['delete'],()=>{
+    app.removeElement(selectedElement.value);
+  },false)
 
   </script>
   
