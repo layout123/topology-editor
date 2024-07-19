@@ -68,8 +68,8 @@ export class Editor extends EventBus<EditorEventArgs> {
   }
 
   public onGraphCreated(){
-    this.graph?.on('node:selected', (node)=>{
-      console.log('当前选中节点',node)
+    this.graph?.on('node:selected', (element)=>{
+      this.emit('ELEMENT_SELECTED',element)
     });
     this.graph?.bindKey('ctrl+c', () => {
       const cells = this.graph?.getSelectedCells()

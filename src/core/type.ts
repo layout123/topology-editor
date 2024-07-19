@@ -47,9 +47,7 @@ export interface RendererEventArgs {
 }
 
 export interface EditorEventArgs {
-  NODE_SELECTED: {
-    node: any;
-  };
+  ELEMENT_SELECTED: any;
 }
 
 export interface AppContextEventArgs extends ProjectEventArgs, EditorEventArgs, RendererEventArgs {
@@ -101,6 +99,7 @@ export interface Command {
 
 export interface Context {
   app: App;
+  selectedElement:any
 }
 
 export type Id = string | number;

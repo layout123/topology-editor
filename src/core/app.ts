@@ -30,16 +30,16 @@ export class App extends EventBus<AppContextEventArgs> {
 
     this.project.on('PROJECT_ADD_NODE', ({node})=>{
       this.renderer.addNode(node)
-      this.emit('GRAPH_CHANGE',{})
+      this.emit('GRAPH_CHANGE',node)
     })
 
     this.project.on('PROJECT_ADD_EDGE',({edge})=>{
       this.renderer.addEdge(edge)
-      this.emit('GRAPH_CHANGE',{})
+      this.emit('GRAPH_CHANGE',edge)
     })
 
-    this.renderer.on('GRAPH_CHANGE',()=>{
-      this.emit('GRAPH_CHANGE',{})
+    this.editor.on('ELEMENT_SELECTED',(element)=>{
+      this.emit('ELEMENT_SELECTED',element)
     })
   }
 

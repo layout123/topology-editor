@@ -17,7 +17,7 @@ export class Renderer extends EventBus<RendererEventArgs> {
       this.graph?.resize()
     })
     this.graph?.on('cell:changed',()=>{
-      this.emit('GRAPH_CHANGE',{})
+      // this.emit('ELEMENT_SELECTED',{ cell, options })
     })
 
     this.graph?.on('node:moved',()=>{

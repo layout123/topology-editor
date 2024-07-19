@@ -1,3 +1,5 @@
 export * from './app'
 export * from './renderer/renderer'
 export * from './editor/editor'
+export * from './base/Node'
+export * from './base/Edge'
