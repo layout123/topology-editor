@@ -69,6 +69,9 @@ export class Editor extends EventBus<EditorEventArgs> {
 
   public onGraphCreated(){
     this.graph?.on('node:selected', (element)=>{
+      // element.node.setPortProp(element.node.id, 'attrs/circle/style', {
+      //   visibility: 'visible',
+      // });
       this.emit('ELEMENT_SELECTED',element)
     });
     this.graph?.bindKey('ctrl+c', () => {

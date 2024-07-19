@@ -23,22 +23,36 @@ export const node = {
     },
     ports: {
       groups: {
-        group1: {
-          position: {
-            name: 'absolute',
-            args: { x: 0, y: 0 },
+        top: {
+          position: 'top',
+          attrs: {
+            circle: {
+              r: 6,
+              magnet: true,
+              stroke: '#31d0c6',
+              strokeWidth: 2,
+              fill: '#fff',
+              visibility: 'hidden',
+            },
+          },
+        },
+        bottom: {
+          position: 'bottom',
+          attrs: {
+            circle: {
+              r: 6,
+              magnet: true,
+              stroke: '#31d0c6',
+              strokeWidth: 2,
+              fill: '#fff',
+              visibility: 'hidden',
+            },
           },
         },
       },
       items: [
-        {
-          group: 'group1',
-          args: {
-            x: '60%',
-            y: 32,
-            angle: 45,
-          },
-        },
+        { id: 'top', group: 'top' },
+        { id: 'bottom', group: 'bottom' },
       ],
     },
   }
