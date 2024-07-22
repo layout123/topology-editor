@@ -1,21 +1,20 @@
 import { EventBus } from '@/utils/event';
 import { generateId } from '@/utils/number';
+import { ProjectInfo } from '@/constants/definition';
 
 import { Renderer } from './renderer/renderer';
 import { Editor } from './editor/editor';
 import { Project } from './base/project';
-import { AppContextEventArgs, Cmd, CmdConst, ExportConst, ProjectData } from './type';
+import { AppContextEventArgs, Cmd, CmdConst, ExportConst, ProjectData, NodeMetaData } from './type';
 
 export class App extends EventBus<AppContextEventArgs> {
   public renderer: Renderer;
-  public editor: Editor;
   public domElement: HTMLDivElement;
   public project: Project;
   constructor() {
     super();
     this.domElement = document.createElement('div');
     this.domElement.setAttribute('style', 'width: 100%; height: 100%; position: relative; overflow: hidden;');
-    this.editor = new Editor(this);
     this.renderer = new Renderer(this);
     this.project = new Project({
       edges: [],
@@ -30,17 +29,13 @@ export class App extends EventBus<AppContextEventArgs> {
     resizeObserver.observe(this.domElement);
 
     this.project.on('PROJECT_ADD_NODE', ({node})=>{
-      this.renderer.addNode(node)
+      this.renderer.addNode(node.customNode)
       this.emit('GRAPH_CHANGE',node)
     })
 
     this.project.on('PROJECT_ADD_EDGE',({edge})=>{
       this.renderer.addEdge(edge)
       this.emit('GRAPH_CHANGE',edge)
-    })
-
-    this.editor.on('ELEMENT_SELECTED',(element)=>{
-      this.emit('ELEMENT_SELECTED',element)
     })
   }
 
@@ -68,7 +63,8 @@ export class App extends EventBus<AppContextEventArgs> {
   }
 
   public addNode(model:any, position:{x:number, y:number}) {
-    const node = {id:generateId(), ...model, position}
+    const id = ProjectInfo.prefix + generateId();
+    const node = {id, ...model, position}
     this.project.addNode(node);
   }
 
@@ -76,9 +72,10 @@ export class App extends EventBus<AppContextEventArgs> {
     this.project.addEdge(edge);
   }
 
-  public removeElement(element:any){
-    this.renderer.graph?.removeNode(element.node.id)
-    this.project.deleteNode(element.node)
+  public removeElement(element:NodeMetaData){
+    console.log('removeElement',element);
+    this.renderer.graph?.removeNode(element.id)
+    this.project.deleteNode(element.id)
     this.emit('GRAPH_CHANGE',{})
   }
 

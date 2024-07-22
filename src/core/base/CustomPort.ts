@@ -1,9 +1,11 @@
-import { Id } from '../type';
-
+import { PortGroupMetadata } from '../type';
 export class CustomPort  {
-    public id : Id;
-  constructor() {
-    this.id = 'id';
+    public id : string;
+    position: PortGroupMetadata['position'];
+  constructor(port:PortGroupMetadata) {
+    const {id, position} = port;
+    this.id = id;
+    this.position = position;
   }
 
 }

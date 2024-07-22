@@ -1,6 +1,6 @@
 import { EventBus } from '@/utils/event';
 
-import { ProjectEventArgs, ProjectData, Id, UnitConfig } from '../type';
+import { ProjectEventArgs, ProjectData, Id, UnitConfig, NodeMetaData } from '../type';
 
 import { Edge } from './Edge';
 import { Node } from './Node';
@@ -23,22 +23,35 @@ export class Project extends EventBus<ProjectEventArgs> {
     this.nodes.push(node);
     this.emit('PROJECT_ADD_NODE', {
       project: this,
-      node,
+      node:curNode,
     });
   }
   public addEdge(edge: any) {
     this.edges.push(edge);
     const curEdge = new Edge(this, edge);
-    this.elementMap.set(curEdge.id, curEdge);
+    this.elementMap.set(curEdge.id, curEdge as any);
     this.emit('PROJECT_ADD_EDGE', {
       project: this,
       edge,
     });
   }
+
+  public updateNode(node: NodeMetaData) {
+    const curNode = this.elementMap.get(node.id);
+   this.elementMap.set(node.id, {...curNode, ...node})
+   this.nodes = this.nodes.map(item=>{
+    if(item.id === node.id){
+      return {...item,...node}
+    }
+    return item
+   })
+   console.log('updateNode',this.elementMap)
+
+  }
    
-  public deleteNode(node: any) {
-    this.nodes = this.nodes.filter((item) => item.id !== node.id);
-    this.elementMap.delete(node.id);
+  public deleteNode(nodeId: string) {
+    this.nodes = this.nodes.filter((item) => item.id !== nodeId);
+    this.elementMap.delete(nodeId);
   }
 
   public initProject(projectData: ProjectData) {

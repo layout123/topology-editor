@@ -1,17 +1,19 @@
 import { AppKey, CommandKey } from '@/constants/inject-keys';
 import { Cmd, CmdConst } from '@/core/type';
-import { App, Node, Edge } from '@/core';
+import { App, Node, Edge, Editor } from '@/core';
 
 export const useApp = () => {
     const app = new App();
+    const editor = new Editor(app, app.renderer.graph!);
     const selectedElement = ref<Node | Edge | null>(null);
 
-    app.on('ELEMENT_SELECTED',(element)=>{
-      selectedElement.value = element;
+    editor.on('ELEMENT_SELECTED',(element)=>{
+      selectedElement.value = element.node;
     })
     
     provide(AppKey, {
       app,
+      editor,
       selectedElement
     });
 

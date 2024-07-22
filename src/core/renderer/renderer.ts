@@ -1,6 +1,7 @@
 import { Graph, Edge, Node, Rectangle, Size } from '@antv/x6';
 import { EventBus } from '@/utils/event';
 import AppContext from '../app';
+import { CustomNode } from '../base/CustomNode';
 import { defaultGraphOptions } from '@/constants/graph';
 import { RendererEventArgs } from '../type';
 export class Renderer extends EventBus<RendererEventArgs> {
@@ -84,8 +85,8 @@ export class Renderer extends EventBus<RendererEventArgs> {
     return this.graph?.graphToLocal(x, y);
   }
 
-  public async addNode(node: Node.Metadata) {
-    this.graph?.addNode(node);
+  public async addNode(node: CustomNode) {
+    this.graph?.addNode(node.metadata);
   }
 
   public async addEdge(edge: Edge.Metadata) {
