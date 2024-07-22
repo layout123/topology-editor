@@ -130,21 +130,14 @@ export interface AppConfig {
   edge: Edge[];
 }
 
-export interface PortGroupMetadata {
+export interface PortConfig {
   id: string;
-  markup?: Markup; // 连接桩 DOM 结构定义。
-  attrs?: Record<string, any>; // 属性和样式。
-  zIndex?: number | 'auto'; // 连接桩的 DOM 层级，值越大层级越高。
-  // 群组中连接桩的布局。
-  position?: [number, number] | string | { name: string; args?: object };
-  label?: {
-    // 连接桩标签
-    markup?: Markup;
-    position?: {
-      // 连接桩标签布局
-      name: string; // 布局名称
-      args?: object; // 布局参数
-    };
+  portName: string;
+  portCode: string,
+  descr: string,
+  position: {
+    x: number;
+    y: number;
   };
 }
 
@@ -157,7 +150,7 @@ export interface NodeMetaData {
   y: number;
   zIndex?: number;
   attrs?: Record<string, any>;
-  ports?: PortGroupMetadata[];
+  ports?: PortConfig[];
 }
 
 export interface UnitConfig extends NodeMetaData {

@@ -24,4 +24,7 @@ export class Node extends Unit {
   public getPort(id:Id) {}
   public addPort(port: CustomPort) {}
   public removePort(port: CustomPort) {}
+
+  public update(config: UnitConfig) {
+  }
 }

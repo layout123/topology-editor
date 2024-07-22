@@ -8,7 +8,7 @@ export class Project extends EventBus<ProjectEventArgs> {
   public projectData: ProjectData;
   public nodes: Node[] = [];
   public edges: Edge[] = [];
-  public elementMap = new Map<Id, UnitConfig>();
+  public elementMap = new Map<Id, Node | Edge>();
 
   constructor(projectData:ProjectData) {
     super();
@@ -37,16 +37,11 @@ export class Project extends EventBus<ProjectEventArgs> {
   }
 
   public updateNode(node: NodeMetaData) {
-    const curNode = this.elementMap.get(node.id);
-   this.elementMap.set(node.id, {...curNode, ...node})
-   this.nodes = this.nodes.map(item=>{
-    if(item.id === node.id){
-      return {...item,...node}
-    }
-    return item
-   })
-   console.log('updateNode',this.elementMap)
-
+   const curNode = this.elementMap.get(node.id)
+   if(curNode) {
+    this.elementMap.set(node.id, curNode)
+    console.log('updateNode',curNode);
+   }
   }
    
   public deleteNode(nodeId: string) {

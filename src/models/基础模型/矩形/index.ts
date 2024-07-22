@@ -21,39 +21,17 @@ export const node = {
         fill: '#262626',
       },
     },
-    ports: {
-      groups: {
-        top: {
-          position: 'top',
-          attrs: {
-            circle: {
-              r: 6,
-              magnet: true,
-              stroke: '#31d0c6',
-              strokeWidth: 2,
-              fill: '#fff',
-              visibility: 'hidden',
-            },
-          },
-        },
-        bottom: {
-          position: 'bottom',
-          attrs: {
-            circle: {
-              r: 6,
-              magnet: true,
-              stroke: '#31d0c6',
-              strokeWidth: 2,
-              fill: '#fff',
-              visibility: 'hidden',
-            },
-          },
+    ports: [
+      {
+        id: 'TI001',
+        portName: '进线端',
+        portCode: 'TI001',
+        descr: '',
+        position: {
+          x: 0,
+          y: 0.5,
         },
       },
-      items: [
-        { id: 'top', group: 'top' },
-        { id: 'bottom', group: 'bottom' },
-      ],
-    },
+    ]
   }
 };

@@ -3,7 +3,6 @@ import { generateId } from '@/utils/number';
 import { ProjectInfo } from '@/constants/definition';
 
 import { Renderer } from './renderer/renderer';
-import { Editor } from './editor/editor';
 import { Project } from './base/project';
 import { AppContextEventArgs, Cmd, CmdConst, ExportConst, ProjectData, NodeMetaData } from './type';
 
@@ -64,7 +63,7 @@ export class App extends EventBus<AppContextEventArgs> {
 
   public addNode(model:any, position:{x:number, y:number}) {
     const id = ProjectInfo.prefix + generateId();
-    const node = {id, ...model, position}
+    const node = {id, ...model, ...position}
     this.project.addNode(node);
   }
 

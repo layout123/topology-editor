@@ -8,6 +8,5 @@ export class CustomNode extends x6Node {
   constructor(node: Node, config:UnitConfig) {
     super(config);
     this.metadata = config;
-    console.log(config);
   }
 }
